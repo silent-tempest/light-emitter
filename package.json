@@ -1,0 +1,19 @@
+{
+  "name": "light-emitter",
+  "version": "1.0.0",
+  "description": "A lightweight implementation of Node's EventEmitter.",
+  "main": "index.js",
+  "author": "SILENT",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/silent-tempest/light-emitter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/silent-tempest/light-emitter/issues"
+  },
+  "homepage": "https://github.com/silent-tempest/light-emitter#readme",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
