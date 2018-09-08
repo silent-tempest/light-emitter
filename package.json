@@ -1,19 +1,31 @@
 {
-  "name": "light-emitter",
+  "name": "light_emitter",
   "version": "1.0.0",
   "description": "A lightweight implementation of Node's EventEmitter.",
   "main": "index.js",
-  "author": "SILENT",
-  "license": "MIT",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "prepublish": "npm run lint && npm run test && npm run docs",
+    "test": "mocha -r chai/register-should",
+    "docs": "jsdoc -d docs .",
+    "lint": "jshint ."
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/silent-tempest/light-emitter.git"
   },
+  "author": "SILENT",
+  "license": "SEE LICENSE IN LICENSE",
   "bugs": {
     "url": "https://github.com/silent-tempest/light-emitter/issues"
   },
   "homepage": "https://github.com/silent-tempest/light-emitter#readme",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "jsdoc": "^3.5.5",
+    "jshint": "^2.9.6",
+    "mocha": "^5.2.0"
   }
 }

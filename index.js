@@ -1,10 +1,10 @@
 'use strict';
 
 /**
- * A lightweight implementation of Node's EventEmitter.
+ * A lightweight implementation of Node.js EventEmitter.
  * @constructor LightEmitter
  * @example
- * var LightEmitter = require( 'light-emitter' );
+ * var LightEmitter = require( 'light_emitter' );
  */
 function LightEmitter () {}
 

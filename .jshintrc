@@ -1,7 +1,6 @@
 {
   "browserify": true,
   "esversion": 3,
-  "browser": true,
   "strict": "global",
   "shadow": true,
   "eqeqeq": true,
