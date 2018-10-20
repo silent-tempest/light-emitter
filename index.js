@@ -5,19 +5,32 @@
  * @constructor LightEmitter
  * @example
  * var LightEmitter = require( 'light_emitter' );
+ * @example
+ * var emitter = new LightEmitter();
+ * @example
+ * function Chat () {
+ *   LightEmitter.call( this );
+ * }
+ * 
+ * Chat.prototype = Object.create( LightEmitter.prototype );
+ * Chat.prototype.constructor = Chat;
  */
 function LightEmitter () {}
 
 LightEmitter.prototype = {
   /**
    * @method LightEmitter#emit
-   * @param {string} type
-   * @param {...any} [data]
-   * @chainable
+   * @param  {string} type   A event name.
+   * @param  {...any} [data] Arguments that should be passed to all handlers.
+   * @return {boolean?} Returns `false` if any handler returned `false` too (stopped propagation).
+   * @example
+   * if ( chat.emit( 'message', 'Hello LightEmitter!' ) !== false ) {
+   *   console.log( 'The message delivered successfully!' );
+   * }
    */
   emit: function emit ( type ) {
     var list = _getList( this, type );
-    var data, i, l;
+    var data, i, l, result;
 
     if ( ! list ) {
       return this;
@@ -37,20 +50,31 @@ LightEmitter.prototype = {
       }
 
       if ( data ) {
-        list[ i ].listener.apply( this, data );
+        result = list[ i ].listener.apply( this, data );
       } else {
-        list[ i ].listener.call( this );
+        result = list[ i ].listener.call( this );
+      }
+
+      if ( result === false ) {
+        return false;
       }
     }
-
-    return this;
   },
 
   /**
    * @method LightEmitter#off
-   * @param {string}   [type]
-   * @param {function} [listener]
+   * @param {string}   [type]     A event name.
+   * @param {function} [listener] A event handler.
    * @chainable
+   * @example
+   * // Remove messageHandler.
+   * emitter.off( 'message', messageHandler );
+   * @example
+   * // Remove all 'message' handlers.
+   * emitter.off( 'message' );
+   * @example
+   * // Remove all handlers.
+   * emitter.off();
    */
   off: function off ( type, listener ) {
     var list, i;
@@ -74,8 +98,8 @@ LightEmitter.prototype = {
 
   /**
    * @method LightEmitter#on
-   * @param {string}   type
-   * @param {function} listener
+   * @param {string}   type     A event name.
+   * @param {function} listener A event handler.
    * @chainable
    */
   on: function on ( type, listener ) {
@@ -85,8 +109,8 @@ LightEmitter.prototype = {
 
   /**
    * @method LightEmitter#once
-   * @param {string}   type
-   * @param {function} listener
+   * @param {string}   type     A event name.
+   * @param {function} listener A event handler.
    * @chainable
    */
   once: function once ( type, listener ) {
